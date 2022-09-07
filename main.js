@@ -1,31 +1,49 @@
 const navbarEmail = document.querySelector('.navbar-email');
+const shoppingCart = document.querySelector(".navbar-shopping-cart");
 const desktopMenu = document.querySelector('.desktop-menu');
 const mobileMenu = document.querySelector('.mobile-menu')
-const mobileHamburguerMenu = document.querySelector('.mobile-hamburguer-menu');
+const mobileHamburguerMenuIcon = document.querySelector('.mobile-hamburguer-menu');
 const myOrders = document.querySelector(".my-orders");
-const shoppingCart = document.querySelector(".navbar-shopping-cart");
+const productDetails = document.querySelector(".product-detail");
+const prodDetailsCloseIcon = document.querySelector(".product-detail-close");
 const cardsContainer = document.querySelector(".cards-container");
 
+
 navbarEmail.addEventListener('click', toggleDesktopMenu);
-mobileHamburguerMenu.addEventListener('click', toggleMobileMenu);
+mobileHamburguerMenuIcon.addEventListener('click', toggleMobileMenu);
 shoppingCart.addEventListener('click', toggleMyOrders);
+prodDetailsCloseIcon.addEventListener('click', closeProdDetails);
 
 
 
 function toggleDesktopMenu(){
     myOrders.classList.add('inactive');
+    productDetails.classList.add('inactive');
     desktopMenu.classList.toggle('inactive');
 }
 
 function toggleMobileMenu(){
     myOrders.classList.add('inactive');
+    productDetails.classList.add('inactive');
     mobileMenu.classList.toggle('inactive');
 }
 
 function toggleMyOrders(){
     desktopMenu.classList.add('inactive');
     mobileMenu.classList.add('inactive');
+    productDetails.classList.add('inactive');
     myOrders.classList.toggle('inactive');
+}
+
+function openProdDetails(){
+    desktopMenu.classList.add('inactive');
+    mobileMenu.classList.add('inactive');
+    myOrders.classList.add('inactive');
+    productDetails.classList.remove('inactive');
+}
+
+function closeProdDetails(){
+    productDetails.classList.add('inactive');
 }
 
 
@@ -34,6 +52,7 @@ function product(prodName, price, imgUrl){
     this.price = price;
     this.imgUrl = imgUrl;
 }
+
 
 //List of articles being sold in the ecommerce.
 const productList = [];
@@ -44,7 +63,6 @@ productList.push(new product("tshirt", 50, 'https://img01.ztat.net/article/spp-m
 //articles and their container HTML
 function renderProducts(arr){
     for(product of arr){
-        //Create all the elements
         const prodCard = document.createElement('div');
         prodCard.classList.add('product-card');
         cardsContainer.appendChild(prodCard);
@@ -52,6 +70,7 @@ function renderProducts(arr){
         const prodImg = document.createElement('img');
         prodImg.setAttribute('src', product.imgUrl);
         prodCard.appendChild(prodImg);
+        prodImg.addEventListener('click', openProdDetails);
 
         const prodInfo = document.createElement('div');
         prodInfo.classList.add('product-info');
@@ -61,18 +80,20 @@ function renderProducts(arr){
         prodInfo.appendChild(infoContainer);
 
         const prodPrice = document.createElement('p');
-        prodPrice.innerHTML = product.price;
+        prodPrice.innerHTML = "$" + product.price;
         infoContainer.appendChild(prodPrice);
 
         const prodName = document.createElement('p');
         prodName.innerHTML = product.prodName;
         infoContainer.appendChild(prodName);
 
-        //insert classes
-        //insert atributes
-        //insert text
-        //append child elements to each parent
+        const addToCart = document.createElement('figure');
+        const addToCartImg = document.createElement('img');
+        addToCartImg.setAttribute('src', "./icons/bt_add_to_cart.svg");
+        addToCart.appendChild(addToCartImg);
+        prodInfo.appendChild(addToCart);
     }
 }
-
 renderProducts(productList);
+
+
