@@ -230,6 +230,7 @@
 
     /*Side product details*/
     .product-detail {
+    margin: 30px;
     width: 360px;
     padding-bottom: 24px;
     position: absolute;
@@ -259,12 +260,14 @@
     margin: 24px 24px 0 24px;
   }
   .product-info p:nth-child(1) {
+    margin: 10px;
     font-weight: bold;
     font-size: var(--md);
     margin-top: 0;
     margin-bottom: 4px;
   }
   .product-info p:nth-child(2) {
+    margin: 10px;
     color: var(--very-light-pink);
     font-size: var(--md);
     margin-top: 0;
@@ -317,7 +320,7 @@
     margin-top: 12px;
   }
   .product-info figure {
-    margin: 0;
+    margin: 10px;
   }
   .product-info figure img {
     width: 35px;
